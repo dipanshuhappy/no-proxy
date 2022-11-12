@@ -6,6 +6,11 @@ import { AbiItem } from "web3-utils";
 import Enrollment_Input from "./components/EnrollmentInput";
 import EnrollmentInput from "./components/EnrollmentInput";
 import { Center } from "@chakra-ui/react";
+import { Routes, Route } from "react-router-dom";
+import Register from "./pages/Register";
+import Details from "./pages/Details";
+import Home from "./pages/Home";
+
 const ABI =
   //   inputs: [
   //     {
@@ -268,9 +273,11 @@ function App() {
 
   return (
     <div className="App">
-      <Center>
-        <EnrollmentInput />
-      </Center>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/details" element={<Details />} />
+      </Routes>
     </div>
   );
 }
