@@ -213,8 +213,7 @@ const ABI = [
     type: "function",
   },
 ];
-let contract: Contract | null = null;
-const run = false;
+let contract: Contract | null = null;let run = false;
 export const getContract = async () => {
   if (!run) {
     const web3 = new Web3(
@@ -228,6 +227,7 @@ export const getContract = async () => {
       ABI as AbiItem[],
       "0x1e69fcb83dbbd393677b4acb8009e266524ba0bb"
     );
+    run=true;
   }
   return contract;
 };
