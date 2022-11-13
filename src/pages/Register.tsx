@@ -8,7 +8,7 @@
 
 import { Input } from "@chakra-ui/input";
 import { Heading, Box, Text, Stack, VStack, Center, Button } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { getContract } from "../contract";
 type FeatureProp = {
   title?: string;
@@ -26,14 +26,16 @@ function Feature({ title, desc }: FeatureProp) {
 
 function Register()
 {
+  const [name,setName]=useState("");
+  const [enroll,setenroll]=useState("");
+  const [batch,setbatch]=useState(0);
+  const [attendance,setattendance]=useState(0);
   const Register = async () => {
     const x = await getContract();
       if (x) {
-        x.methods
-          .Register("e21cseu0423","nithin",20,0)
-          // ._name("nithin")
-          // ._batch(20)
-          // ._attendance(0)
+         
+        await x.methods
+          .Register(enroll,name,batch,attendance)
           .send({ from: "0xeEE0895Ab015C146472FBeC5754c3082f62B855f" });
       }
     };
@@ -44,10 +46,10 @@ function Register()
           title="Registration "
           desc="Register Here By Entering Student Details "
         />
-        <Input placeholder="Enrollment number" size="lg" variant={"filled"} />
-        <Input placeholder="Student Name" size="lg" variant={"filled"} />
-        <Input placeholder="Batch" size="lg" variant={"filled"} />
-        <Input placeholder="Attendance" size="lg" variant={"filled"} />
+        <Input onChange={(e:any)=> setenroll( e.currentTarget.value)} placeholder="Enrollment number" size="lg" variant={"filled"} />
+        <Input onChange={(e:any)=> setName( e.currentTarget.value)} placeholder="Student Name" size="lg" variant={"filled"} />
+        <Input onChange={(e:any)=> setbatch(parseInt(e.currentTarget.value))} placeholder="Batch" size="lg" variant={"filled"} />
+        <Input onChange={(e:any)=>setattendance(parseInt(e.currentTarget.value))} placeholder="Attendance" size="lg" variant={"filled"} />
         
         <Center>
         <Button marginTop={"32px"} onClick={async () => await Register()}>

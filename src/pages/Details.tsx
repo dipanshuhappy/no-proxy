@@ -35,50 +35,66 @@ function Feature({ title, desc }: FeatureProp) {
 
 function Details() {
   const [studentsArray, setStudentsArray] = useState([] as any[])
-  const Details = async () => {
+  const details = async () => {
+    // setStudentsArray([])
     const x = await getContract();
-
+    if(x){
+      const size = await x.methods.Array_Size().call();
+      let newStudents=[]
+      for(let i = 0 ; i < size ; i++){
+      
+      const student = await x.methods.stud_details(i).call()
+        newStudents.push(student)
+      }
+      setStudentsArray(newStudents)
+      
+    }
+    // console.log("jfksdflsdjf;lsdfjs;flk")
+   
    
 
-    if (x) {
-      let i = 0;
-      console.log("in the if of x")
-      let student = {};
-      // let studentsArray: {}[] = []
-      while (student != undefined) {
-        console.log("jksdflsdjf;;l")
-        await x.methods.stud_details(i).call(
-          function (err: any, res: any) {
-            student = res;
-            //@ts-ignore
-            i++;
-          }
-        )
-       
-        if(student==undefined){
-          break
-        }
-        setStudentsArray([...studentsArray, student])
-
-        console.log(student)
+    // if (x) {
+    //   let i = 0;
+    //   // console.log("in the if of x")
+    //   let student = {};
+    //   let newStudents=[]
+    //   // let studentsArray: {}[] = []
+    //   while (student != undefined) {
+    //     // console.log("jksdflsdjf;;l")
         
-      }
+    //     student = await x.methods.stud_details(i).call()
+          
+        
+    //     if(student==undefined){
+    //       break
+    //     }
+        
+    //     // setTimeout(()=>{},1500)
+       
+
+    //     console.log(student)
+    //     newStudents.push(student)
+    //     i++;
+    //   }
+    //   console.log({newStudents})
+    //   //@ts-ignore
+    // setStudentsArray([...newStudents])
       // x.methods.stud_details(8).call(
       //   function(err:any,res:any){
-      //     console.log({res})
+      //     console.log({res})`
 
       //   }
       // )
       // setStudentsArray(studentsArray.filter((i)=>i!=undefined))
-      console.log({ studentsArray })
+      // console.log({ studentsArray })
       // ._name("nithin")
       // ._batch(20)
       // ._attendance(0)
 
       // .send({ from: "0xeEE0895Ab015C146472FBeC5754c3082f62B855f" });
       // console.log({a})
-    }
-  };
+      
+    };
   return (
     <Box p={5} shadow="2xl" borderWidth="1px">
       <VStack spacing={8} direction="row">
@@ -96,18 +112,23 @@ function Details() {
             studentsArray.map(
               (student:any,index)=>
               <ListItem key={index}>
-               Id: {student.enroll} , Name : {student.name} , batch : {student.batch} , attendance : {student.attendace}
+                {student.enroll}  {student.name} {student.batch} {student.attendance}
               </ListItem>
               )
           }
         </OrderedList>
+        {/* <p>
+          {JSON.stringify(
+            [...new Map(studentsArray.map(item => [item["enroll"], item])).values()]
+          )}
+        </p> */}
 
 
 
-        <Input placeholder="Enrollment number" size="lg" variant={"filled"} />
+        {/* <Input placeholder="Enrollment number" size="lg" variant={"filled"} /> */}
 
         <Center>
-          <Button marginTop={"32px"} onClick={ async () => await Details()}>
+          <Button marginTop={"32px"} onClick={details}>
             Get Student Details
           </Button>
         </Center>
