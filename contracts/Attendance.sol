@@ -60,14 +60,14 @@ contract attendence
         return stud_details;
     }
 
-    function Student_Details(string memory _x) public view returns(Student memory)
-    {
-        for(uint i=0; i<stud_details.length; i++)
-        {
-            if(keccak256(abi. encodePacked(stud_details[i].enroll)) == keccak256(abi. encodePacked(_x)))
-            {
-            return stud_details[i];
-            }
-        }
-    } 
+    // function Student_Details(string memory _x) public view returns(Student memory)
+    // {
+    //     for(uint i=0; i<stud_details.length; i++)
+    //     {
+    //         if(keccak256(abi. encodePacked(stud_details[i].enroll)) == keccak256(abi. encodePacked(_x)))
+    //         {
+    //         return stud_details[i];
+    //         }
+    //     }
+    // } 
 }
