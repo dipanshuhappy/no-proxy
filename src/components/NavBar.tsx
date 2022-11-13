@@ -19,7 +19,8 @@ const isDesktop = useBreakpointValue({ base: false, lg: true })
                 position: "relative",
                 right: "90%"
             }}/>
-            {isDesktop ? (
+            {
+            // isDesktop ? (
               <Flex justify="space-between" flex="1">
                 <ButtonGroup variant="link" spacing="8" style={{
                     position: "relative",
@@ -32,13 +33,14 @@ const isDesktop = useBreakpointValue({ base: false, lg: true })
                   <Button variant="primary"><Link to={"/details"}>Student Details</Link></Button>
                 </HStack>
               </Flex>
-            ) : (
-              <IconButton
-                variant="ghost"
-                icon={<FiMenu fontSize="1.25rem" />}
-                aria-label="Open Menu"
-              />
-            )}
+           // ) : (
+            //   // <IconButton
+            //   //   variant="ghost"
+            //   //   icon={<FiMenu fontSize="1.25rem" />}
+            //   //   aria-label="Open Menu"
+            //   // />
+            // )
+            }
           </HStack>
         </Container>
       </Box>
