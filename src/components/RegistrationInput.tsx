@@ -1,11 +1,3 @@
-// import React from "react";
-
-// function Register() {
-//   return <div>sjdflslfl</div>;
-// }
-
-// export default Register;
-
 import { Input } from "@chakra-ui/input";
 import { Heading, Box, Text, Stack, VStack } from "@chakra-ui/react";
 import React from "react";
@@ -23,19 +15,16 @@ function Feature({ title, desc }: FeatureProp) {
     );
   }
 
-function Register()
+function RegistrationInput()
 {
   return (
     <Box p={5} shadow="2xl" borderWidth="1px">
       <VStack spacing={8} direction="row">
         <Feature
-          title="Registration "
-          desc="Register Here By Entering Student Details "
+          title="Enter Your Attendance "
+          desc="Enter Your Attendance By Simply Putting Your Enrollment Number . "
         />
         <Input placeholder="Enrollment number" size="lg" variant={"filled"} />
-        <Input placeholder="Student Name" size="lg" variant={"filled"} />
-        <Input placeholder="Batch" size="lg" variant={"filled"} />
-        <Input placeholder="Attendance" size="lg" variant={"filled"} />
       </VStack>
     </Box>
     
@@ -43,4 +32,4 @@ function Register()
 }
 
 
-export default Register;
+export default RegistrationInput;

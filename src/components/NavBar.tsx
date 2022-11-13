@@ -1,9 +1,10 @@
 import { Input } from "@chakra-ui/input";
-import { Heading, Box, Text, Stack, VStack, useBreakpointValue, Button, ButtonGroup, Container, Flex, HStack, IconButton, useColorModeValue } from "@chakra-ui/react";
+import { Heading, Box, Text, Stack, VStack, useBreakpointValue, Button, ButtonGroup, Container, Flex, HStack, IconButton, useColorModeValue, color } from "@chakra-ui/react";
 import React from "react";
 import logo from "../assets/logo.png";
 // import React from 'react';
 import { FiMenu } from 'react-icons/fi'
+import { Link } from "react-router-dom";
 // import React from 'react';
 
 
@@ -22,15 +23,13 @@ const isDesktop = useBreakpointValue({ base: false, lg: true })
               <Flex justify="space-between" flex="1">
                 <ButtonGroup variant="link" spacing="8" style={{
                     position: "relative",
-                    right: "87%"
+                    right: "89%"
                 }}>
-                  {['NO - PROXY'].map((item) => (
-                    <Button key={item}>{item}</Button>
-                  ))}
+                  <text color="Black"><b>No - Proxy</b></text>
                 </ButtonGroup>
-                <HStack spacing="5">
-                  <Button variant="ghost">Register</Button>
-                  <Button variant="primary">Student Details</Button>
+                <HStack spacing="8">
+                  <Button variant="ghost"><Link to={"/register"}>Register</Link></Button>
+                  <Button variant="primary"><Link to={"/details"}>Student Details</Link></Button>
                 </HStack>
               </Flex>
             ) : (
