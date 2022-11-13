@@ -252,29 +252,10 @@ const ABI =
 
 function App() {
   const [count, setCount] = useState(0);
-  const callContract = async () => {
-    const web3 = new Web3(
-      // @ts-ignore
-      window.ethereum
-    );
-    // @ts-ignore
-    await window.ethereum.enable();
-    // const accounts = web3.eth.getAccounts();
-    const NameContract = new web3.eth.Contract(
-      ABI as AbiItem[],
-      "0x1e69fcb83dbbd393677b4acb8009e266524ba0bb"
-    );
-    //@ts-ignore
-    console.log(
-      await NameContract.methods
-        .Register("e21cseu0423", "nithin", 20, 0)
-        .send({ from: "0xeEE0895Ab015C146472FBeC5754c3082f62B855f" })
-    );
-  };
 
   return (
     <div className="App">
-      <NavBar/>
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
