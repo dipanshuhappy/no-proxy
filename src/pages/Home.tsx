@@ -7,8 +7,9 @@ function Home() {
     <Box width={"100%"} height={"100%"}>
       <Center>
         <EnrollmentInput />
-        <Button>Enroll Here</Button>
+       
       </Center>
+      <center><Button marginTop={"32px"}>Enroll Here</Button></center>
     </Box>
   );
 }
