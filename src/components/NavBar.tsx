@@ -1,7 +1,7 @@
 import { Input } from "@chakra-ui/input";
 import { Heading, Box, Text, Stack, VStack, useBreakpointValue, Button, ButtonGroup, Container, Flex, HStack, IconButton, useColorModeValue, color } from "@chakra-ui/react";
 import React from "react";
-import logo from "../assets/logo.png";
+import logo from "../../public/logo.png";
 // import React from 'react';
 import { FiMenu } from 'react-icons/fi'
 import { Link } from "react-router-dom";
