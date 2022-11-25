@@ -50,9 +50,6 @@ function Details() {
       
     }
     // console.log("jfksdflsdjf;lsdfjs;flk")
-   
-   
-
     // if (x) {
     //   let i = 0;
     //   // console.log("in the if of x")
@@ -110,11 +107,12 @@ function Details() {
         <OrderedList>
           {
             studentsArray.map(
-              (student:any,index)=>
+              (Student:any,index)=>
               <ListItem key={index}>
-                {student.enroll}  {student.name} {student.batch} {student.attendance}
+                {Student.enroll}  {Student.name} {Student.batch} {Student.check_roll}
               </ListItem>
               )
+
           }
         </OrderedList>
         {/* <p>
