@@ -21,12 +21,15 @@ function Home() {
       console.log(error);
     }
   }, []);
-  const enroll = async () => {
+  const enroll = async () => {};
+  const check_roll = async () => {
     const c = await getContract();
     if (c) {
       c.methods
         .mark_roll("e21cseu0423")
-        .send({ from: "0xeEE0895Ab015C146472FBeC5754c3082f62B855f" });
+        .send({ from: "0xeEE0895Ab015C146472FBeC5754c3082f62B855f" })
+        .check_roll()
+        .call();
     }
   };
   return (
@@ -43,6 +46,12 @@ function Home() {
         >
           Enroll Here
         </Button>
+        {/* <Button marginTop={"32px"} onClick={() => check_roll()}>
+          Mark Attendance
+        </Button><br/>
+        <Button marginTop={"32px"} onClick={() => check_roll()}>
+          Check Attendance
+        </Button> */}
       </Center>
     </Box>
   );
