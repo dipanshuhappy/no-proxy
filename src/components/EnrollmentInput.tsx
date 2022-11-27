@@ -15,7 +15,7 @@ function Feature({ title, desc }: FeatureProp) {
 }
 function EnrollmentInput() {
   return (
-    <Box p={5} shadow="2xl" borderWidth="1px">
+    <Box borderColor={"#6d00af"} p={5} shadow="2xl" borderWidth="1px">
       <VStack spacing={8} direction="row">
         <Feature
           title="Enter Your Attendance "
@@ -26,7 +26,5 @@ function EnrollmentInput() {
     </Box>
   );
 }
-
-
 
 export default EnrollmentInput;
