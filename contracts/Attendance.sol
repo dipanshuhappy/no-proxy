@@ -19,9 +19,6 @@ contract attendence
         uint batch;
         uint attendence;
     }
-
-    // Student[] student;
-    // mapping(uint => Student) students;
     mapping(string => Student) public students1;
     Student[] public stud_details;
     Student stud1;
