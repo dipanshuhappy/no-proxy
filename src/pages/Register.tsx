@@ -52,7 +52,12 @@ function Register()
         <Input onChange={(e:any)=>setattendance(parseInt(e.currentTarget.value))} placeholder="Attendance" size="lg" variant={"filled"} />
         
         <Center>
-        <Button marginTop={"32px"} onClick={async () => await Register()}>
+        <Button
+          backgroundColor={"#6d00af"}
+          color="white"
+          marginTop={"32px"}
+          onClick={async () => await Register()}
+        >
           Register Here
         </Button>
       </Center>

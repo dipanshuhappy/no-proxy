@@ -32,13 +32,13 @@ contract attendence
         require(msg.sender == Faculty, "You are not Faculty to Register Students.");
         _;
     }
-    // modifier secure1
-    // {
-    //     require()
-    // }
 
     function Register(string memory _enroll, string memory _name, uint _batch, uint _attendance) public secure
     {
+        for(uint i=0; i<stud_details.length; i++)
+        {
+            require(keccak256(abi. encodePacked(stud_details[i].enroll)) != keccak256(abi. encodePacked(_enroll)), "already registered.");
+        }
         stud1 = Student(_enroll, _name, _batch, _attendance);
         stud_details.push(stud1);
 
@@ -46,12 +46,20 @@ contract attendence
 
     function mark_roll(string memory _roll) public secure
     {
-        //stud_details.push((stud_details[attendence]++))
+        for(uint i=0; i<stud_details.length; i++)
+        {
+            require(keccak256(abi. encodePacked(stud_details[i].enroll)) == keccak256(abi. encodePacked(_roll)), "student not enrolled.");
+        }
         students1[_roll].attendence++;
     }
 
     function check_roll(string memory _roll) public view returns(uint)
     {
+        for(uint i=0; i<stud_details.length; i++)
+        {
+            require(keccak256(abi. encodePacked(stud_details[i].enroll)) == keccak256(abi. encodePacked(_roll)), "enroll number not found");
+            // require(keccak256(abi.encodedPacked(st)))
+        }
         return students1[_roll].attendence;
     }
 
@@ -60,14 +68,23 @@ contract attendence
         return stud_details;
     }
 
-    // function Student_Details(string memory _x) public view returns(Student memory)
-    // {
-    //     for(uint i=0; i<stud_details.length; i++)
-    //     {
-    //         if(keccak256(abi. encodePacked(stud_details[i].enroll)) == keccak256(abi. encodePacked(_x)))
-    //         {
-    //         return stud_details[i];
-    //         }
-    //     }
-    // } 
+    function Array_Size() public view returns(uint)
+    {
+        return stud_details.length;
+    }
+
+    function Student_Details(string memory _roll, string memory __name ) public view returns(Student memory)
+    {
+        for(uint i=0; i<stud_details.length; i++)
+        {
+            if(keccak256(abi. encodePacked(stud_details[i].enroll)) == keccak256(abi. encodePacked(_roll)))
+            {
+            return stud_details[i];
+            }
+            if(keccak256(abi. encodePacked(stud_details[i].name)) == keccak256(abi. encodePacked(__name)))
+            {
+            return stud_details[i];
+            }
+        }
+    } 
 }

@@ -1,4 +1,6 @@
 import { Input } from "@chakra-ui/input";
+import { ColorModeScript } from '@chakra-ui/react';
+import { useColorMode } from '@chakra-ui/react'
 import {
   Heading,
   Box,
@@ -24,44 +26,53 @@ import { Link } from "react-router-dom";
 
 function NavBar() {
   const isDesktop = useBreakpointValue({ base: false, lg: true });
+  const { colorMode, toggleColorMode } = useColorMode()
   return (
     <Box as="section" pb={{ base: "12", md: "24" }}>
       <Box
         as="nav"
-        bg="bg-surface"
+        bg="#6d00af"
+
         boxShadow={useColorModeValue("sm", "sm-dark")}
+        
       >
         <Container py={{ base: "4", lg: "5" }}>
-          <HStack spacing="5">
+          <HStack spacing="3">
             <img
               src={logo}
               height="50px"
               width="50px"
               style={{
                 position: "relative",
-                right: "90%"
+                right: "100%"
             }}/>
             {
             // isDesktop ? (
               <Flex justify="space-between" flex="1">
                 <ButtonGroup
                   variant="link"
-                  spacing="8"
+                  spacing="6"
                   style={{
                     position: "relative",
-                    right: "89%",
+                    right: "80%",
                   }}
                 >
                   <text color="Black">
-                    <b>No - Proxy</b>
+                    <b>No Proxy</b>
                   </text>
                 </ButtonGroup>
                 <HStack spacing="8">
+                <Button variant="ghost">
+                    <Link to={"/home"}>Home</Link>
+                  </Button>
                   <Button variant="ghost">
                     <Link to={"/register"}>Register</Link>
                   </Button>
-                  <Button variant="primary">
+                  <Button variant="ghost">
                     <Link to={"/details"}>Student Details</Link>
+                  </Button>
+                  <Button onClick={toggleColorMode}>
+                        {colorMode === 'light' ? 'Dark' : 'Light'}
                   </Button>
                 </HStack>
               </Flex>

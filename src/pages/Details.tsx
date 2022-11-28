@@ -126,9 +126,14 @@ function Details() {
         {/* <Input placeholder="Enrollment number" size="lg" variant={"filled"} /> */}
 
         <Center>
-          <Button marginTop={"32px"} onClick={details}>
-            Get Student Details
-          </Button>
+        <Button
+          backgroundColor={"#6d00af"}
+          color="white"
+          marginTop={"32px"}
+          onClick={details}
+        >
+          Get Student Details
+        </Button>
         </Center>
 
       </VStack>
