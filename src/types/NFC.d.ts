@@ -9,6 +9,7 @@
 interface Window {
   NDEFMessage: NDEFMessage;
 }
+
 declare class NDEFMessage {
   constructor(messageInit: NDEFMessageInit);
   records: ReadonlyArray<NDEFRecord>;
@@ -66,6 +67,7 @@ declare class NDEFReadingEvent extends Event {
   serialNumber: string;
   message: NDEFMessage;
 }
+
 interface NDEFReadingEventInit extends EventInit {
   serialNumber?: string;
   message: NDEFMessageInit;
@@ -81,3 +83,9 @@ interface NDEFMakeReadOnlyOptions {
 interface NDEFScanOptions {
   signal: AbortSignal;
 }
+// declare global {
+//   interface NDEFReader {
+//     reading: NDEFReadingEvent;
+//   }
+// }
+// export {};

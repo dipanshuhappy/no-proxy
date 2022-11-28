@@ -1,27 +1,58 @@
 import { Box, Center, Button } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import EnrollmentInput from "../components/EnrollmentInput";
 import { getContract } from "../contract";
+import { useToast } from "@chakra-ui/react";
+import { readTextRecord } from "../utils";
 
 function Home() {
-  console.log("ijflsjfsljflsdjflksdjflsdjf");
+  // console.log("ijflsjfsljflsdjflksdjflsdjf");
+  const [ndefState, setNdefState] = useState<NDEFReader>();
+  const toast = useToast();
   useEffect(() => {
-    alert(window.NDEFReader);
-    // alert(new NDEFReader());
-    // alert("hekllw ");
-    console.log("jklsjflksjflsdjflksjdflsjfl");
-    console.log({ window });
-    // alert("ksdfklj");
-    /*global NDEFReader*/
-    try {
-      const ndef = new NDEFReader();
-      console.log({ ndef });
-    } catch (error) {
-      console.log(error);
+    if ("NDEFReader" in window) {
+      toast({
+        title: "NFC is Supported",
+        description: "Press the scan button to take attendance ",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+      });
+      setNdefState(new NDEFReader());
     }
   }, []);
-  const enroll = async () => {};
+  const enroll = async () => {
+    try {
+      await ndefState?.scan();
+      ndefState?.addEventListener("reading", (event) => {
+        const message = (event as NDEFReadingEvent).message;
+        const text = readTextRecord(message.records[0]);
+        console.log({ text });
+        toast({
+          title: `${text}`,
+          description: "Scan read",
+          status: "success",
+          duration: 3000,
+          isClosable: false,
+        });
+      });
+      // if (ndefState) {
+      //   ndefState.onreading = ({ message }) => {
+      //     console.log({ message });
+      //   };
+      // }
+    } catch (error) {
+      toast({
+        title: "Error while Scanning",
+        description: "Try again later",
+        status: "error",
+        duration: 3000,
+        isClosable: false,
+      });
+      console.log(error);
+    }
+  };
   const check_roll = async () => {
     const c = await getContract();
     if (c) {
@@ -44,7 +75,7 @@ function Home() {
           marginTop={"32px"}
           onClick={() => enroll()}
         >
-          Enroll Here
+          Start Scan
         </Button>
         {/* <Button marginTop={"32px"} onClick={() => check_roll()}>
           Mark Attendance
