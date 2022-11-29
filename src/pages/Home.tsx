@@ -20,6 +20,14 @@ function Home() {
         isClosable: true,
       });
       setNdefState(new NDEFReader());
+    } else {
+      toast({
+        title: "NFC is Not Supported",
+        description: "Press the scan button to take attendance ",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
     }
   }, []);
   const enroll = async () => {
