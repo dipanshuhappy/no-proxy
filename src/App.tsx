@@ -12,11 +12,7 @@ import Details from "./pages/Details";
 import Home from "./pages/Home";
 import NavBar from "./components/NavBar";
 
-
-
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div className="App">
       <NavBar />
