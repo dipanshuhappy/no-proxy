@@ -32,6 +32,8 @@ const Links = [
   { name: "Home", link: "/" },
   { name: "Register", link: "/register" },
   { name: "Student Details", link: "/details" },
+  { name: "Register Faculty", link: "/faculty" },
+  { name: "Session", link: "/session" },
 ];
 
 const NavLink = ({ children, to }: { children: ReactNode; to: string }) => (
@@ -55,7 +57,7 @@ export default function NavBar() {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
-      <Box backgroundColor="primary" px="4" py="2">
+      <Box backgroundColor="primary" px="4" mb={"8"} py="2">
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <IconButton
             size={"lg"}
