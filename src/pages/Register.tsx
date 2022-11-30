@@ -17,20 +17,8 @@ import {
   Button,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { Feature } from "../components/Feature";
 import { getContract } from "../contract";
-type FeatureProp = {
-  title?: string;
-  desc?: string;
-};
-
-function Feature({ title, desc }: FeatureProp) {
-  return (
-    <Box p={5} borderWidth="1px">
-      <Heading fontSize="xl">{title}</Heading>
-      <Text mt={4}>{desc}</Text>
-    </Box>
-  );
-}
 
 function Register() {
   const [name, setName] = useState("");
