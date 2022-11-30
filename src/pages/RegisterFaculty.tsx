@@ -1,14 +1,16 @@
 import { Box, Button, Center, Input, useToast, VStack } from "@chakra-ui/react";
 import { nanoid } from "nanoid";
 import React, { useState } from "react";
+import useLocalStorage from "react-use-localstorage";
 import Web3 from "web3";
 import { Feature } from "../components/Feature";
+import { FACULTY } from "../contants";
 import { getAddress, getContract, getWeb3 } from "../contract";
 import { useToasts } from "../hooks/useToasts";
 
 function RegisterFaculty() {
   const [name, setName] = useState("");
-
+  const [facultyId, setFacultyId] = useLocalStorage(FACULTY, "null");
   const [loading, setLoading] = useState(false);
   const { successToast, errorToast } = useToasts();
 
@@ -26,6 +28,7 @@ function RegisterFaculty() {
         .send({ from: address })
         .then((receipt: any) => {
           console.log(receipt);
+          setFacultyId(id);
           successToast(
             "Registration Done ",
             `Faculty Registered with id ${id}`

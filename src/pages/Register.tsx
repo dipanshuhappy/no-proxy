@@ -17,20 +17,35 @@ import {
   Button,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
+import useLocalStorage from "react-use-localstorage";
 import { Feature } from "../components/Feature";
-import { getContract } from "../contract";
+import { STUDENT } from "../contants";
+import { getAddress, getContract } from "../contract";
+import { useToasts } from "../hooks/useToasts";
 
 function Register() {
   const [name, setName] = useState("");
   const [enroll, setenroll] = useState("");
-  const [batch, setbatch] = useState(0);
-  const [attendance, setattendance] = useState(0);
+  const [studentId, setStudentId] = useLocalStorage(STUDENT, "null");
+  // const [batch, setbatch] = useState(0);
+  // const [attendance, setattendance] = useState(0);
   const Register = async () => {
     const x = await getContract();
+    const address = await getAddress();
+    const { successToast, errorToast } = useToasts();
+
     if (x) {
       await x.methods
-        .Register(enroll, name, batch, attendance)
-        .send({ from: "0xeEE0895Ab015C146472FBeC5754c3082f62B855f" });
+        .register_student(enroll, name)
+        .send({ from: address })
+        .then((receipt: any) => {
+          console.log(receipt);
+          setStudentId(enroll);
+          successToast(
+            "Registration Done ",
+            `Student Registered with id ${enroll}`
+          );
+        });
     }
   };
   return (
@@ -52,7 +67,7 @@ function Register() {
           size="lg"
           variant={"filled"}
         />
-        <Input
+        {/* <Input
           onChange={(e: any) => setbatch(parseInt(e.currentTarget.value))}
           placeholder="Batch"
           size="lg"
@@ -63,7 +78,7 @@ function Register() {
           placeholder="Attendance"
           size="lg"
           variant={"filled"}
-        />
+        /> */}
 
         <Center>
           <Button

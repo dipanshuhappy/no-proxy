@@ -12,6 +12,11 @@ const ABI = [
       },
       {
         internalType: "string",
+        name: "_name",
+        type: "string",
+      },
+      {
+        internalType: "string",
         name: "_faculty_id",
         type: "string",
       },
@@ -34,6 +39,49 @@ const ABI = [
     name: "create_session",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string",
+      },
+    ],
+    name: "faculty_details",
+    outputs: [
+      {
+        internalType: "string",
+        name: "id",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "name",
+        type: "string",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "_s_id",
+        type: "string",
+      },
+    ],
+    name: "get_session_students",
+    outputs: [
+      {
+        internalType: "string[]",
+        name: "",
+        type: "string[]",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -108,54 +156,16 @@ const ABI = [
         type: "string",
       },
     ],
-    name: "faculty_details",
-    outputs: [
-      {
-        internalType: "string",
-        name: "id",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "name",
-        type: "string",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "string",
-        name: "_s_id",
-        type: "string",
-      },
-    ],
-    name: "get_session_students",
-    outputs: [
-      {
-        internalType: "string[]",
-        name: "",
-        type: "string[]",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "string",
-        name: "",
-        type: "string",
-      },
-    ],
     name: "session_details",
     outputs: [
       {
         internalType: "string",
         name: "s_id",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "name",
         type: "string",
       },
       {
@@ -233,7 +243,7 @@ export const getContract = async () => {
     await window.ethereum.enable();
     contract = new web3.eth.Contract(
       ABI as AbiItem[],
-      "0xC62A30A89C0f8a9c6e72087988356bac55dc177F"
+      "0xc63d3FcF47474E517b379Bd7d239203bE957c3c9"
     );
     run = true;
   }

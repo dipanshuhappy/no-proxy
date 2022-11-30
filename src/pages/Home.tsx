@@ -2,14 +2,19 @@ import { Box, Center, Button } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 
 import EnrollmentInput from "../components/EnrollmentInput";
-import { getContract } from "../contract";
+import { getAddress, getContract } from "../contract";
 import { useToast } from "@chakra-ui/react";
 import { readTextRecord } from "../utils";
+import SimpleCrypto from "simple-crypto-js";
+import { PRIVATE_KEY } from "../contants";
+import { useToasts } from "../hooks/useToasts";
 
 function Home() {
   // console.log("ijflsjfsljflsdjflksdjflsdjf");
   const [ndefState, setNdefState] = useState<NDEFReader>();
   const toast = useToast();
+  const { successToast, errorToast } = useToasts();
+
   useEffect(() => {
     if ("NDEFReader" in window) {
       toast({
@@ -33,17 +38,27 @@ function Home() {
   const enroll = async () => {
     try {
       await ndefState?.scan();
-      ndefState?.addEventListener("reading", (event) => {
+      ndefState?.addEventListener("reading", async (event) => {
         const message = (event as NDEFReadingEvent).message;
-        const text = readTextRecord(message.records[0]);
-        console.log({ text });
-        toast({
-          title: `${text}`,
-          description: "Scan read",
-          status: "success",
-          duration: 3000,
-          isClosable: false,
-        });
+        const cipher = readTextRecord(message.records[0]);
+        const crypto = new SimpleCrypto(PRIVATE_KEY);
+        const text = crypto.decrypt(cipher);
+        const sessionId = text.toString().split(" ")[0];
+        const password = text.toString().split(" ")[1];
+        const contract = await getContract();
+        const address = await getAddress();
+        if (contract) {
+          await contract.methods
+            .mark_attendance(sessionId, password, new Date().getTime())
+            .send({ from: address })
+            .then((receipt: any) => {
+              console.log(receipt);
+              successToast(
+                "Attendance Done ",
+                `Attendace Registered with ${sessionId}`
+              );
+            });
+        }
       });
       // if (ndefState) {
       //   ndefState.onreading = ({ message }) => {
@@ -59,16 +74,6 @@ function Home() {
         isClosable: false,
       });
       console.log(error);
-    }
-  };
-  const check_roll = async () => {
-    const c = await getContract();
-    if (c) {
-      c.methods
-        .mark_roll("e21cseu0423")
-        .send({ from: "0xeEE0895Ab015C146472FBeC5754c3082f62B855f" })
-        .check_roll()
-        .call();
     }
   };
   return (
