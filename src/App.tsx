@@ -11,6 +11,8 @@ import Register from "./pages/Register";
 import Details from "./pages/Details";
 import Home from "./pages/Home";
 import NavBar from "./components/NavBar";
+import RegisterFaculty from "./pages/RegisterFaculty";
+import Session from "./pages/Session";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/details" element={<Details />} />
+        <Route path="/faculty" element={<RegisterFaculty />} />
+        <Route path="/session" element={<Session />} />
       </Routes>
     </div>
   );
