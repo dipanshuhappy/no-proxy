@@ -27,13 +27,14 @@ function Register() {
   const [name, setName] = useState("");
   const [enroll, setenroll] = useState("");
   const [studentId, setStudentId] = useLocalStorage(STUDENT, "null");
+  const { successToast, errorToast } = useToasts();
+
   // const [batch, setbatch] = useState(0);
   // const [attendance, setattendance] = useState(0);
   const register = async () => {
     const x = await getContract();
     const address = await getAddress();
-    const { successToast, errorToast } = useToasts();
-
+    console.log(x);
     if (x) {
       await x.methods
         .register_student(enroll, name)

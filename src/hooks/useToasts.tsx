@@ -5,6 +5,7 @@ export function useToasts() {
     isClosable: true,
     colorScheme: "purple",
     size: "xl",
+    duration: 4000,
     variant: "left-accent",
   });
   const successToast = (title: string, description: string) =>

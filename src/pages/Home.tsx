@@ -6,15 +6,16 @@ import { getAddress, getContract } from "../contract";
 import { useToast } from "@chakra-ui/react";
 import { readTextRecord } from "../utils";
 import SimpleCrypto from "simple-crypto-js";
-import { PRIVATE_KEY } from "../contants";
+import { PRIVATE_KEY, STUDENT } from "../contants";
 import { useToasts } from "../hooks/useToasts";
+import useLocalStorage from "react-use-localstorage";
 
 function Home() {
   // console.log("ijflsjfsljflsdjflksdjflsdjf");
   const [ndefState, setNdefState] = useState<NDEFReader>();
   const toast = useToast();
   const { successToast, errorToast } = useToasts();
-
+  const [studentId, setStudentId] = useLocalStorage(STUDENT, "null");
   useEffect(() => {
     if ("NDEFReader" in window) {
       toast({
@@ -52,6 +53,7 @@ function Home() {
             .mark_attendance(
               sessionId,
               parseInt(password),
+              studentId,
               new Date().getTime()
             )
             .send({ from: address })
