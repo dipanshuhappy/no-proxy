@@ -196,6 +196,7 @@ function Session() {
             </Button>
           </Center>
         )}
+        <Text>{id}</Text>
       </VStack>
     </Box>
   );
