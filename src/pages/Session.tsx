@@ -56,7 +56,8 @@ function Session() {
   const createSession = async () => {
     setLoading(true);
     const contract = await getContract();
-    setId(nanoid(5));
+    const newSessionID = nanoid(5);
+    setId(newSessionID);
     const nowStart = new Date();
     const nowEnd = new Date();
     nowStart.setHours(parseInt(start.split(":")[0]));
@@ -66,7 +67,7 @@ function Session() {
 
     console.log({ contract });
     console.log(
-      id,
+      newSessionID,
       name,
       facultyId,
       parseInt(password),
@@ -78,7 +79,7 @@ function Session() {
     if (contract) {
       await contract.methods
         .create_session(
-          id,
+          newSessionID,
           name,
           facultyId,
           parseInt(password),
@@ -100,8 +101,9 @@ function Session() {
   };
   const startScan = async () => {
     const crypto = new SimpleCrypto(PRIVATE_KEY);
-    const cipher = crypto.encrypt(`${id}#${password}`);
-    console.log({ cipher });
+    // const cipher = crypto.encrypt(`${id}#${password}`);
+    // console.log({ cipher });
+    console.log(`${id}#${password}`);
     if ("NDEFReader" in window) {
       successToast(
         "NFC is  Supported",
@@ -109,9 +111,9 @@ function Session() {
       );
 
       await ndefState
-        ?.write(cipher)
+        ?.write(`${id}#${password}`)
         .then(() => {
-          successToast(`NFC  is writ4v ten  ${cipher}`, "");
+          successToast(`NFC  is writ4v ten  ${id}#${password}`, "");
         })
         .catch(console.log);
     } else {
