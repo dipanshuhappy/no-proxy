@@ -113,7 +113,7 @@ function Session() {
       await ndefState
         ?.write(`${id}#${password}`)
         .then(() => {
-          successToast(`NFC  is writ4v ten  ${id}#${password}`, "");
+          successToast(`NFC  is written  ${id}#${password}`, "");
         })
         .catch(console.log);
     } else {

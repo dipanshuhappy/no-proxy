@@ -37,34 +37,34 @@ function Home() {
   }, []);
   const enroll = async () => {
     try {
-      // await ndefState?.scan();
-      // ndefState?.addEventListener("reading", async (event) => {
-      //   const message = (event as NDEFReadingEvent).message;
-      //   const cipher = readTextRecord(message.records[0]);
-      //   const crypto = new SimpleCrypto(PRIVATE_KEY);
-      //   const text = crypto.decrypt(cipher);
-      //   const sessionId = text.toString().split(" ")[0];
-      //   const password = text.toString().split(" ")[1];
-      //   const contract = await getContract();
-      //   const address = await getAddress();
-      //   if (contract) {
-      //     await contract.methods
-      //       .mark_attendance(sessionId, password, new Date().getTime())
-      //       .send({ from: address })
-      //       .then((receipt: any) => {
-      //         console.log(receipt);
-      //         successToast(
-      //           "Attendance Done ",
-      //           `Attendace Registered with ${sessionId}`
-      //         );
-      //       });
-      //   }
-      await ndefState
-        ?.write("Test this is")
-        .then(() => {
-          successToast(`NFC  is writ4v ten  test worked`, "");
-        })
-        .catch(console.log);
+      await ndefState?.scan();
+      ndefState?.addEventListener("reading", async (event) => {
+        const message = (event as NDEFReadingEvent).message;
+      const text = readTextRecord(message.records[0]);
+      // const crypto = new SimpleCrypto(PRIVATE_KEY);
+      // const text = crypto.decrypt(cipher);
+        const sessionId = text.toString().split("#")[0];
+        const password = text.toString().split("#")[1];
+        const contract = await getContract();
+        const address = await getAddress();
+        if (contract) {
+          await contract.methods
+            .mark_attendance(sessionId, parseInt(password), new Date().getTime())
+            .send({ from: address })
+            .then((receipt: any) => {
+              console.log(receipt);
+              successToast(
+                "Attendance Done ",
+                `Attendace Registered with ${sessionId}`
+              );
+            });
+        }
+      // await ndefState
+      //   ?.write("Test this is")
+      //   .then(() => {
+      //     successToast(`NFC  is writ4v ten  test worked`, "");
+      //   })
+      //   .catch(console.log);
       // });
       // if (ndefState) {
       //   ndefState.onreading = ({ message }) => {
