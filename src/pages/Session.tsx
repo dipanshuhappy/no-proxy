@@ -42,7 +42,14 @@ function Session() {
     nowEnd.setMinutes(parseInt(end.split(":")[1]));
 
     console.log({ contract });
-
+    console.log(
+      id,
+      name,
+      facultyId,
+      parseInt(password),
+      nowStart.getTime(),
+      nowEnd.getTime()
+    );
     const address = await getAddress();
     console.log({ id });
     if (contract) {
