@@ -40,16 +40,20 @@ function Home() {
       await ndefState?.scan();
       ndefState?.addEventListener("reading", async (event) => {
         const message = (event as NDEFReadingEvent).message;
-      const text = readTextRecord(message.records[0]);
-      // const crypto = new SimpleCrypto(PRIVATE_KEY);
-      // const text = crypto.decrypt(cipher);
+        const text = readTextRecord(message.records[0]);
+        // const crypto = new SimpleCrypto(PRIVATE_KEY);
+        // const text = crypto.decrypt(cipher);
         const sessionId = text.toString().split("#")[0];
         const password = text.toString().split("#")[1];
         const contract = await getContract();
         const address = await getAddress();
         if (contract) {
           await contract.methods
-            .mark_attendance(sessionId, parseInt(password), new Date().getTime())
+            .mark_attendance(
+              sessionId,
+              parseInt(password),
+              new Date().getTime()
+            )
             .send({ from: address })
             .then((receipt: any) => {
               console.log(receipt);
@@ -59,6 +63,7 @@ function Home() {
               );
             });
         }
+      });
       // await ndefState
       //   ?.write("Test this is")
       //   .then(() => {
