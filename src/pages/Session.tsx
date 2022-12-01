@@ -10,7 +10,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { nanoid } from "nanoid";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useLocalStorage from "react-use-localstorage";
 import SimpleCrypto from "simple-crypto-js";
 import { Feature } from "../components/Feature";
@@ -29,7 +29,30 @@ function Session() {
   const [sessionId, setSessionId] = useLocalStorage(SESSION, "null");
   const { successToast, errorToast } = useToasts();
   const [showNFC, setShowNFC] = useState(false);
+  const [ndefState, setNdefState] = useState<NDEFReader>();
+
   const [id, setId] = useState("");
+  useEffect(() => {
+    if ("NDEFReader" in window) {
+      successToast(
+        "NFC is  Supported",
+        "Press the scan button to take attendance "
+      );
+      setNdefState(new NDEFReader());
+    } else {
+      // toast({
+      //   title: "NFC is Not Supported",
+      //   description: "Press the scan button to take attendance ",
+      //   status: "error",
+      //   duration: 2000,
+      //   isClosable: true,
+      // });
+      errorToast(
+        "NFC is Not Supported",
+        "Press the scan button to take attendance "
+      );
+    }
+  }, []);
   const createSession = async () => {
     setLoading(true);
     const contract = await getContract();
@@ -77,16 +100,16 @@ function Session() {
   };
   const startScan = async () => {
     const crypto = new SimpleCrypto(PRIVATE_KEY);
-    const cipher = crypto.encrypt(`${id} ${password}`);
+    const cipher = crypto.encrypt(`${id}#${password}`);
+    console.log({ cipher });
     if ("NDEFReader" in window) {
       successToast(
         "NFC is  Supported",
         "Press the scan button to take attendance "
       );
 
-      const ndef = new NDEFReader();
-      await ndef
-        .write(cipher)
+      await ndefState
+        ?.write(cipher)
         .then(() => {
           successToast(`NFC  is writ4v ten  ${cipher}`, "");
         })
