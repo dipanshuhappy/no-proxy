@@ -45,49 +45,6 @@ const ABI = [
     inputs: [
       {
         internalType: "string",
-        name: "",
-        type: "string",
-      },
-    ],
-    name: "faculty_details",
-    outputs: [
-      {
-        internalType: "string",
-        name: "id",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "name",
-        type: "string",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "string",
-        name: "_s_id",
-        type: "string",
-      },
-    ],
-    name: "get_session_students",
-    outputs: [
-      {
-        internalType: "string[]",
-        name: "",
-        type: "string[]",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "string",
         name: "_s_id",
         type: "string",
       },
@@ -146,6 +103,49 @@ const ABI = [
     name: "register_student",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string",
+      },
+    ],
+    name: "faculty_details",
+    outputs: [
+      {
+        internalType: "string",
+        name: "id",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "name",
+        type: "string",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "_s_id",
+        type: "string",
+      },
+    ],
+    name: "get_session_students",
+    outputs: [
+      {
+        internalType: "string[]",
+        name: "",
+        type: "string[]",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -243,7 +243,7 @@ export const getContract = async () => {
     await window.ethereum.enable();
     contract = new web3.eth.Contract(
       ABI as AbiItem[],
-      "0xc63d3FcF47474E517b379Bd7d239203bE957c3c9"
+      "0xacdaeAecf6e98b9ECB01c8d007d3eff42E6bb179"
     );
     run = true;
   }
