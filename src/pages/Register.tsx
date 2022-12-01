@@ -29,7 +29,7 @@ function Register() {
   const [studentId, setStudentId] = useLocalStorage(STUDENT, "null");
   // const [batch, setbatch] = useState(0);
   // const [attendance, setattendance] = useState(0);
-  const Register = async () => {
+  const register = async () => {
     const x = await getContract();
     const address = await getAddress();
     const { successToast, errorToast } = useToasts();
@@ -85,7 +85,7 @@ function Register() {
             backgroundColor={"#6d00af"}
             color="white"
             marginTop={"32px"}
-            onClick={async () => await Register()}
+            onClick={async () => await register()}
           >
             Register Here
           </Button>
