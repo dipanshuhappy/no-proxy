@@ -51,7 +51,7 @@ function Session() {
           id,
           name,
           facultyId,
-          password,
+          parseInt(password),
           nowStart.getTime(),
           nowEnd.getTime()
         )
@@ -81,7 +81,7 @@ function Session() {
       await ndef
         .write(cipher)
         .then(() => {
-          successToast(`NFC  is written  ${cipher}`, "");
+          successToast(`NFC  is writ4v ten  ${cipher}`, "");
         })
         .catch(console.log);
     } else {
