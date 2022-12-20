@@ -30,3 +30,8 @@ then students will go to home page.....
 students need to click on "Start Scan" and need to tap nfc with their mobile, then their attendance will be marked...
 
 faculty will check attendance in session tab by enterning the session id.
+
+
+any queries contact us:
+- mnithin1422@gmail.com
+- dipanshuhappy@gmail.com
