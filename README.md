@@ -1,11 +1,11 @@
-# no-proxy
+# no-proxy 
 Here we developed an Application - "Blockchain based Attendance Management System using NFC's."
 This is not only useful in School/College levels this is also useful at one-day sessions, hackathons and etc.....
 But, now i will explain how to use in college level, mostly process is same for everywhere.
 let's get into it.
 
 Requirements:
-- Metamask wallet.
+- Metamask wallet.  
 - NFC Support.
 
 Note: 
